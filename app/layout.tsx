@@ -1,8 +1,12 @@
+
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import ThemeProvider from '@/public/src/theme/ThemeProvider'
 import clsx from 'clsx';
+import Header from '@/public/src/features/layout/Header';
+import { Footer } from '@/public/src/features/layout/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +16,20 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  console.log('enfant ', children)
   return (
-    <html lang="en">
-    
-    <body className={clsx(inter.className, "bg-background")}>
-      <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-        {children}
+    <html lang="en" className='h-full'>
+
+    <body className={clsx(inter.className, "bg-background h-full")}>
+      <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
+        <div className='flex flex-col h-full'>
+          <Header />
+          <div className="flex-1 max-w-lg m-auto py-12 w-full">{children}</div>
+        <Footer/>
+        </div>
       </ThemeProvider>
     </body>
-    
+
     </html>
     )
   }
-  
